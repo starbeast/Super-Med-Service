@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Departments" EntityType="Model.Store.Departments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Doctors" EntityType="Model.Store.Doctors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Patients" EntityType="Model.Store.Patients" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ranges" EntityType="Model.Store.Ranges" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tickets" EntityType="Model.Store.Tickets" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Doctors_Departments" Association="Model.Store.FK_Doctors_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Ranges" Association="Model.Store.FK_Doctors_Ranges">
+            <End Role="Ranges" EntitySet="Ranges" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Doctors" Association="Model.Store.FK_Tickets_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Patients" Association="Model.Store.FK_Tickets_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DepName" Type="nchar" Nullable="false" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="LastName" Type="nchar" Nullable="false" MaxLength="30" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="EmergencyCounter" Type="int" Nullable="false" />
+          <Property Name="isEven" Type="bit" Nullable="false" />
+          <Property Name="RangeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="CarNumber" />
+          </Key>
+          <Property Name="CarNumber" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="LastName" Type="nchar" Nullable="false" MaxLength="30" />
+          <Property Name="Email" Type="nchar" Nullable="false" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="Ranges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Interval" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="DocId" />
+            <PropertyRef Name="Time" />
+          </Key>
+          <Property Name="DocId" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="CardNumber" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="ConfirmationStatus" Type="bit" Nullable="false" />
+          <Property Name="Complaint" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Doctors_Departments">
+          <End Role="Departments" Type="Model.Store.Departments" Multiplicity="1" />
+          <End Role="Doctors" Type="Model.Store.Doctors" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Ranges">
+          <End Role="Ranges" Type="Model.Store.Ranges" Multiplicity="1" />
+          <End Role="Doctors" Type="Model.Store.Doctors" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Ranges">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Doctors">
+          <End Role="Doctors" Type="Model.Store.Doctors" Multiplicity="1" />
+          <End Role="Tickets" Type="Model.Store.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="DocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Patients">
+          <End Role="Patients" Type="Model.Store.Patients" Multiplicity="1" />
+          <End Role="Tickets" Type="Model.Store.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="CarNumber" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Model.Department" />
+          <EntitySet Name="Doctors" EntityType="Model.Doctor" />
+          <EntitySet Name="Patients" EntityType="Model.Patient" />
+          <EntitySet Name="Ranges" EntityType="Model.Range" />
+          <EntitySet Name="Tickets" EntityType="Model.Ticket" />
+          <AssociationSet Name="FK_Doctors_Departments" Association="Model.FK_Doctors_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Patients" Association="Model.FK_Tickets_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Ranges" Association="Model.FK_Doctors_Ranges">
+            <End Role="Range" EntitySet="Ranges" />
+            <End Role="Doctor" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Doctors" Association="Model.FK_Tickets_Doctors">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DepName" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Doctor" Relationship="Model.FK_Doctors_Departments" FromRole="Departments" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="EmergencyCounter" Type="Int32" Nullable="false" />
+          <Property Name="isEven" Type="Boolean" Nullable="false" />
+          <Property Name="RangeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Model.FK_Doctors_Departments" FromRole="Doctors" ToRole="Departments" />
+          <NavigationProperty Name="Range" Relationship="Model.FK_Doctors_Ranges" FromRole="Doctor" ToRole="Range" />
+          <NavigationProperty Name="Tickets" Relationship="Model.FK_Tickets_Doctors" FromRole="Doctor" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="CarNumber" />
+          </Key>
+          <Property Name="CarNumber" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="40" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Tickets" Relationship="Model.FK_Tickets_Patients" FromRole="Patients" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="Range">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Interval" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Model.FK_Doctors_Ranges" FromRole="Range" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="DocId" />
+            <PropertyRef Name="Time" />
+          </Key>
+          <Property Name="DocId" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CardNumber" Type="Guid" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfirmationStatus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Model.FK_Tickets_Patients" FromRole="Tickets" ToRole="Patients" />
+          <NavigationProperty Name="Doctor" Relationship="Model.FK_Tickets_Doctors" FromRole="Ticket" ToRole="Doctor" />
+          <Property Type="String" Name="Complaint" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Doctors_Departments">
+          <End Role="Departments" Type="Model.Department" Multiplicity="1" />
+          <End Role="Doctors" Type="Model.Doctor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Patients">
+          <End Role="Patients" Type="Model.Patient" Multiplicity="1" />
+          <End Role="Tickets" Type="Model.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="CarNumber" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Ranges">
+          <End Type="Model.Range" Role="Range" Multiplicity="1" />
+          <End Type="Model.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Range">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Doctors">
+          <End Type="Model.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="Model.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="DocId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Model.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="Model.Doctor">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="EmergencyCounter" ColumnName="EmergencyCounter" />
+                <ScalarProperty Name="isEven" ColumnName="isEven" />
+                <ScalarProperty Name="RangeId" ColumnName="RangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="Model.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="CarNumber" ColumnName="CarNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ranges">
+            <EntityTypeMapping TypeName="Model.Range">
+              <MappingFragment StoreEntitySet="Ranges">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Interval" ColumnName="Interval" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="Model.Ticket">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+                <ScalarProperty Name="DocId" ColumnName="DocId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ConfirmationStatus" ColumnName="ConfirmationStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
