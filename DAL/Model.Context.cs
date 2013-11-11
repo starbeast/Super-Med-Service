@@ -7,20 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using DomainModel;
+
 namespace DAL
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using DomainModel;
     
     public partial class Entities : DbContext
     {
         public Entities()
             : base("name=Entities")
         {
-			Configuration.LazyLoadingEnabled = false;
-			Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

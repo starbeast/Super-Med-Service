@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9ee8d0abba44469290239a354bf6d313" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Doctor" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Patient" Width="1.5" PointX="0.5" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Range" Width="1.5" PointX="5.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Ticket" Width="1.5" PointX="2.75" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="4dc5cd1defd4478690bbd0ee70decbea" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Doctor" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Patient" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Range" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Ticket" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Doctors_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Doctors_Ranges" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Tickets_Doctors" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_Tickets_Patients" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_Doctors_Ranges" />
-        <AssociationConnector Association="Model.FK_Tickets_Doctors" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
