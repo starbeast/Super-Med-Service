@@ -11,12 +11,13 @@ namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Department
-    {
-        public int Id { get; set; }
-        public string DepName { get; set; }
-    
-        public virtual Doctor Doctor { get; set; }
-    }
+
+	public partial class Department : IEntity
+	{
+		public int Id { get; set; }
+		public string DepName { get; set; }
+
+		public virtual Doctor Doctor { get; set; }
+		public EntityState EntityState { get; set; }
+	}
 }

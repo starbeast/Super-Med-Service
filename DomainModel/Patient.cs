@@ -11,19 +11,20 @@ namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Patient
-    {
-        public Patient()
-        {
-            this.Tickets = new HashSet<Ticket>();
-        }
-    
-        public System.Guid CarNumber { get; set; }
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-    
-        public virtual ICollection<Ticket> Tickets { get; set; }
-    }
+
+	public partial class Patient : IEntity
+	{
+		public Patient()
+		{
+			this.Tickets = new HashSet<Ticket>();
+		}
+
+		public System.Guid CarNumber { get; set; }
+		public string Name { get; set; }
+		public string LastName { get; set; }
+		public string Email { get; set; }
+
+		public virtual ICollection<Ticket> Tickets { get; set; }
+		public EntityState EntityState { get; set; }
+	}
 }

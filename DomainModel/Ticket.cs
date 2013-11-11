@@ -11,17 +11,18 @@ namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Ticket
-    {
-        public int DocId { get; set; }
-        public System.DateTime Time { get; set; }
-        public System.Guid CardNumber { get; set; }
-        public System.DateTime CreationTime { get; set; }
-        public bool ConfirmationStatus { get; set; }
-        public string Complaint { get; set; }
-    
-        public virtual Patient Patient { get; set; }
-        public virtual Doctor Doctor { get; set; }
-    }
+
+	public partial class Ticket : IEntity
+	{
+		public int DocId { get; set; }
+		public System.DateTime Time { get; set; }
+		public System.Guid CardNumber { get; set; }
+		public System.DateTime CreationTime { get; set; }
+		public bool ConfirmationStatus { get; set; }
+		public string Complaint { get; set; }
+
+		public virtual Patient Patient { get; set; }
+		public virtual Doctor Doctor { get; set; }
+		public EntityState EntityState { get; set; }
+	}
 }
