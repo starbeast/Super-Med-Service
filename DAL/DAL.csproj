@@ -45,13 +45,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DataRepositories\DepartmentRepository.cs" />
+    <Compile Include="DataRepositories\DoctorRepository.cs" />
+    <Compile Include="DataRepositories\PatientRepository.cs" />
+    <Compile Include="DataRepositories\RangeRepository.cs" />
+    <Compile Include="DataRepositories\TicketRepository.cs" />
+    <Compile Include="DbContextExtentions.cs" />
     <Compile Include="Department.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Doctor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataRepositories\GenericDataRepository.cs" />
+    <Compile Include="Interfaces\IDepartmentRepository.cs" />
+    <Compile Include="Interfaces\IDoctorRepository.cs" />
+    <Compile Include="Interfaces\IGenericDataRepository.cs" />
+    <Compile Include="Interfaces\IPatientRepository.cs" />
+    <Compile Include="Interfaces\IRangeRepository.cs" />
+    <Compile Include="Interfaces\ITicketRepository.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

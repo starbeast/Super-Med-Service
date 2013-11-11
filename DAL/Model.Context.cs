@@ -19,6 +19,8 @@ namespace DAL
         public Entities()
             : base("name=Entities")
         {
+			Configuration.LazyLoadingEnabled = false;
+			Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
